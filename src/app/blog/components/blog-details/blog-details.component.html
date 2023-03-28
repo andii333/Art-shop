@@ -1,0 +1,60 @@
+<div class="path" [@fadeIn]>
+    <a class="path__name" routerLink="/homepage">Homepage</a>
+    <span class="path__name path__name_sign">/</span>
+    <a class="path__name path__name_last">{{categoryName$ | async}}</a>
+</div>
+<div class="detail">
+    <div class="detail__reply reply">
+        <form class="reply__form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="form__box-name-email">
+                <h3 class="form__header">Leave a reply</h3>
+                <p class="form__text">Allrady have an account? Sign in to leave a reply.</p>
+                <div class="form__part">
+                    <label class="form__lable" for="firstName">Name</label>
+                    <input class="form__input" type="text" id="firstName" placeholder="First name"
+                        formControlName="firstName">
+                    <span class="form__invalid"
+                        *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].touched">
+                        <small *ngIf="form.controls['firstName'].errors?.['minlength']">Field is too short</small>
+                        <small *ngIf="form.controls['firstName'].errors?.['maxlength']">Field is too long</small>
+                        <small *ngIf="form.controls['firstName'].errors?.['required']">Field can`t be empty</small>
+                    </span>
+                </div>
+                <div class="form__part">
+                    <label class="form__lable" for="email">Email address</label>
+                    <input class="form__input" type="text" id="email" placeholder="Email address"
+                        formControlName="email">
+                    <span class="form__invalid"
+                        *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+                        <small *ngIf="form.controls['email'].errors?.['email']">It is`n email address</small>
+                        <small *ngIf="form.controls['email'].errors?.['required']">Field can`t be empty</small>
+                    </span>
+                </div>
+            </div>
+            <div class="form__input-check-box">
+                <input type="checkbox" class="form__input-check" data-cy="differentAddress">
+                <label for="" class="form__lable-check">Save my name and email in this browser for a next time
+                    comment.</label>
+            </div>
+            <div class="form__part">
+                <label class="form__lable" for="name">Comment *</label>
+                <textarea class="form__comments-textarea" type="text" placeholder="Space for your comments" rows="5"
+                    formControlName="comments">
+                    </textarea>
+                <span class="form__invalid"
+                    *ngIf="form.controls['comments'].invalid && form.controls['comments'].touched">
+                    <small *ngIf="form.controls['comments'].errors?.['minlength']">Field is too short</small>
+                    <small *ngIf="form.controls['comments'].errors?.['maxlength']">Field is too long</small>
+                    <small *ngIf="form.controls['comments'].errors?.['required']">Field can`t be empty</small>
+                </span>
+            </div>
+            <p class="form__tip" *ngIf="form.invalid">fields marked with * must be filled</p>
+            <button class="form__submit-btn btn test_btn" type="submit" [disabled]="form.invalid">Send a comment
+            </button>
+
+            <!-- <ng-template *ngIf="(loadingProductsReviews$ | async) || (loadingShopsReviews$ | async)">
+                <div class="loading">Loading ...</div>
+            </ng-template> -->
+        </form>
+    </div>
+</div>
